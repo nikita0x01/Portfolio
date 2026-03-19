@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0b0f16;
+  --card: #111827;
+  --accent: #64ffda;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(100,255,218,0.12), transparent 60%) no-repeat,
+    radial-gradient(800px 500px at 10% 10%, rgba(100,255,218,0.06), transparent 50%) no-repeat,
+    #0b0f16;
+}
+
+.section { @apply max-w-6xl mx-auto px-6 md:px-10 lg:px-12; }
+.section-padding { @apply py-24 md:py-32; }
+.glass { @apply bg-white/5 backdrop-blur-md border border-white/10; }
+.btn { @apply inline-flex items-center gap-2 px-5 py-3 rounded-md text-sm font-medium transition-transform duration-300; }
+.btn-primary { @apply bg-accent text-bg hover:scale-[1.03] shadow-soft; }
+.btn-secondary { @apply bg-white/10 text-white hover:bg-white/20; }
+.card { @apply glass rounded-xl shadow-soft hover:shadow-lg transition-all duration-300; }
+.nav-link { @apply text-sm text-gray-300 hover:text-white transition-colors; }
+/* ================================
+   Certifications Section Styling
+================================ */
+
+#certifications {
+  text-align: left;
+}
+
+/* Section title */
+#certifications .section-title {
+  font-size: 32px;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+/* Card layout */
+#certifications .card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+/* Individual card */
+#certifications .card {
+  background-color: #111;
+  padding: 24px;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+#certifications .card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Certificate title */
+#certifications .card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Issuer name */
+#certifications .card p {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+/* Year */
+#certifications .year {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #aaa;
+}
+/* Align section heading like Projects */
+.section-header {
+  max-width: 900px;
+  margin-bottom: 50px;
+}
+
+.section-header .section-title {
+  font-size: 42px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.section-header .section-subtitle {
+  font-size: 16px;
+  line-height: 1.7;
+  opacity: 0.85;
+  text-align: left;
+  max-width: 700px;
+}
+
