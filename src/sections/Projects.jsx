@@ -36,7 +36,7 @@ export default function Projects() {
         stargazers_count: 45,
         language: "Node.js",
         updated_at: "2026-02-16",
-        html_url: "https://github.com/YOUR_USERNAME/api-server",
+        html_url: "https://github.com/nikita0x01/NexaGPT",
         image_url: "https://plus.unsplash.com/premium_photo-1677094310919-d0361465d3be?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Unsplash image related to server or API
       }
     ]

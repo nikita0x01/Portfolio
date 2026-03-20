@@ -4,7 +4,7 @@ const TOKENS = [
   "<div>", "</div>", "{ }", "( )", "[ ]", "=>", "const", "let", "function",
   "< />", "return", "map()", "filter()", "useState()", "useEffect()",
   "<Component/>", "props", "className", "&&", "||", "=== ", "!==",
-  "import", "export", "<Route/>", "<span>", "</span>",
+  "import", "export", "<Route/>", "<span>", "</span>","<Nikita/>",
 
   // Added latest modern tokens
   "<section>", "</section>",
@@ -38,7 +38,7 @@ export default function CodeBackground() {
     const size = rand(12, 22)
     const x = rand(-5, 105)
     const y = rand(-10, 110)
-    const dur = rand(12, 22)
+    const dur = rand(4, 9)
     const delay = rand(0, 10)
     const opacity = rand(0.2, 0.6)
     const token = TOKENS[i % TOKENS.length]
