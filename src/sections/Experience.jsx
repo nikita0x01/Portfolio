@@ -32,7 +32,7 @@ const EXPERIENCES = [
 ];
 
 export default function Experience() {
-  const typedHeading = useTypingText("Education & Experience", 80);
+  const typedHeading = useTypingText("Education", 80);
   
   return (
     <div>
