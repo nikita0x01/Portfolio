@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTypingText, ANIMATION_VARIANTS } from "../utils/animations";
 
 const EXPERIENCES = [
   {
@@ -31,52 +32,60 @@ const EXPERIENCES = [
 ];
 
 export default function Experience() {
+  const typedHeading = useTypingText("Education & Experience", 80);
+  
   return (
     <div>
       <motion.h2
         className="text-3xl md:text-4xl font-semibold mb-4"
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.5 }}
+        {...ANIMATION_VARIANTS.textContainer}
       >
-        Education
+        {typedHeading}
       </motion.h2>
-      <p className="text-gray-300 mb-10 max-w-2xl">
-        A quick snapshot of my Educational journey so far.
-      </p>
 
-      <div className="space-y-4">
-        {EXPERIENCES.map((exp, i) => (
-          <motion.article
-            key={`${exp.company}-${exp.role}-${i}`}
-            className="card p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: i * 0.08 }}
-            whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      <motion.p 
+        className="text-gray-300 mb-10 max-w-2xl"
+        {...ANIMATION_VARIANTS.fadeInUp}
+      >
+        My educational journey and technical background, from foundational learning to advanced engineering concepts.
+      </motion.p>
+
+      <motion.div 
+        className="space-y-6"
+        {...ANIMATION_VARIANTS.staggerContainer}
+      >
+        {EXPERIENCES.map((exp, idx) => (
+          <motion.div
+            key={exp.role}
+            className="card p-6 relative"
+            {...ANIMATION_VARIANTS.slideInRight}
+            transition={{ ...ANIMATION_VARIANTS.slideInRight.transition, delay: idx * 0.15 }}
           >
-            <div>
-              <h3 className="text-lg font-semibold">{exp.role}</h3>
-              <div className="text-sm text-gray-400">
-                {exp.company} • {exp.period} • {exp.percentage}
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold text-white mb-1">{exp.role}</h3>
+                <p className="text-accent font-medium mb-2">{exp.company}</p>
+                <p className="text-gray-400 text-sm mb-3">{exp.period}</p>
+                <p className="text-gray-300 text-sm leading-relaxed mb-4">{exp.summary}</p>
+                <div className="flex flex-wrap gap-2">
+                  {exp.stack.map((skill) => (
+                    <span
+                      key={skill}
+                      className="text-xs rounded-full border border-white/10 bg-white/5 px-3 py-1 text-gray-200"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <p className="text-sm text-gray-300 mt-2">{exp.summary}</p>
+              <div className="md:text-right">
+                <div className="text-2xl font-bold text-accent mb-1">{exp.percentage}</div>
+                <div className="text-xs text-gray-400">Score</div>
+              </div>
             </div>
-            <div className="flex flex-wrap gap-2 text-xs">
-              {exp.stack.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-gray-200"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </motion.article>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

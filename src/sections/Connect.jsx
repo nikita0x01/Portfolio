@@ -13,10 +13,12 @@ import { FaDev } from "react-icons/fa"
 import { SiHashnode } from "react-icons/si"
 import emailjs from "@emailjs/browser"
 import { SITE_CONFIG } from "../config"
+import { useTypingText, ANIMATION_VARIANTS } from "../utils/animations"
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" })
   const [status, setStatus] = useState({ type: "idle", message: "" })
+  const typedHeading = useTypingText("Let's Connect", 80);
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -66,7 +68,7 @@ export default function Contact() {
 
       setStatus({
         type: "success",
-        message: "Message sent! I’ll get back to you soon.",
+        message: "Message sent! I'll get back to you soon.",
       })
       setForm({ name: "", email: "", message: "" })
     } catch (err) {
@@ -83,26 +85,24 @@ export default function Contact() {
     <div>
       <motion.h2
         className="text-3xl md:text-4xl font-semibold mb-4"
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.5 }}
+        {...ANIMATION_VARIANTS.textContainer}
       >
-        Let&apos;s Connect
+        {typedHeading}
       </motion.h2>
-      <p className="text-gray-300 mb-10 max-w-2xl">
-        Have an idea, an opportunity, or a problem to solve? Drop a message and I’ll
+      
+      <motion.p 
+        className="text-gray-300 mb-10 max-w-2xl"
+        {...ANIMATION_VARIANTS.fadeInUp}
+      >
+        Have an idea, an opportunity, or a problem to solve? Drop a message and I'll
         respond as soon as I can.
-      </p>
+      </motion.p>
 
       <div className="grid lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] gap-8 items-start">
         <motion.form
           onSubmit={handleSubmit}
           className="card p-6 space-y-4"
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5 }}
+          {...ANIMATION_VARIANTS.slideInLeft}
         >
           <div>
             <label className="block text-sm text-gray-300 mb-1" htmlFor="name">
@@ -143,7 +143,7 @@ export default function Contact() {
               value={form.message}
               onChange={handleChange}
               className="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2 text-sm outline-none focus:border-accent focus:ring-1 focus:ring-accent/70 resize-none"
-              placeholder="Tell me a bit about what you’re looking to build..."
+              placeholder="Tell me a bit about what you're looking to build..."
             />
           </div>
 
@@ -171,7 +171,10 @@ export default function Contact() {
           </button>
         </motion.form>
 
-        <div className="space-y-4">
+        <motion.div 
+          className="space-y-4"
+          {...ANIMATION_VARIANTS.slideInRight}
+        >
           <InfoCard icon={<FiMapPin />} title="Location" value="Kalyan, Thane" delay={0} />
           <InfoCard icon={<FiPhone />} title="Phone" value="8591550614" delay={0.05} />
           <InfoCard icon={<FiMail />} title="Email" value="satputenikita204@gmail.com" delay={0.1} />
@@ -229,9 +232,9 @@ export default function Contact() {
           </motion.div>
 
           <p className="text-gray-400 text-sm mt-6 italic">
-            I try to respond within 24 hours - if you don’t hear back, feel free to reach out via LinkedIn.
+            I try to respond within 24 hours - if you don't hear back, feel free to reach out via LinkedIn.
           </p>
-        </div>
+        </motion.div>
       </div>
     </div>
   )
@@ -242,8 +245,8 @@ function InfoCard({ icon, title, value, delay }) {
   return (
     <motion.div
       className="card p-4 flex items-start gap-4"
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, x: 50 }}
+      whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5, delay }}
       whileHover={{ y: -3, transition: { duration: 0.2 } }}

@@ -1,8 +1,8 @@
 import { motion } from "framer-motion"
 import { FiGithub, FiArrowRight } from "react-icons/fi"
 import { SITE_CONFIG } from "../config"
-import mypic from "../assets/mypic.jpg";
-
+import mypic from "../assets/mypic.jpg"
+import { useState, useEffect } from "react"
 
 const HIGHLIGHT_STATEMENTS = [
   "Always learning and exploring new technologies",
@@ -12,6 +12,23 @@ const HIGHLIGHT_STATEMENTS = [
 ]
 
 export default function Hero() {
+  const [typedText, setTypedText] = useState("")
+  const fullText = `${SITE_CONFIG.name}, Full-Stack Developer`
+  
+  useEffect(() => {
+    let index = 0
+    const timer = setInterval(() => {
+      if (index < fullText.length) {
+        setTypedText(fullText.slice(0, index + 1))
+        index++
+      } else {
+        clearInterval(timer)
+      }
+    }, 100)
+    
+    return () => clearInterval(timer)
+  }, [])
+  
   return (
     <div className="grid md:grid-cols-2 gap-10 items-center">
       <motion.div
@@ -23,7 +40,7 @@ export default function Hero() {
       >
         <p className="text-accent">Hey, I&apos;m</p>
         <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-          {SITE_CONFIG.name},  Full-Stack Developer
+          {typedText}
         </h1>
         <p className="text-gray-300 max-w-xl">
           I develop complete, end-to-end web applications by working across both the frontend and backend. I build dynamic interfaces using React and Tailwind CSS, integrate modern JavaScript and APIs, and design backend services that transform ideas into fast, scalable, and reliable digital products.
@@ -59,15 +76,33 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        className="relative flex items-center justify-center md:justify-end"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.7 }}
-        className="relative"
+        transition={{ duration: 0.3 }}
       >
         <div className="absolute -inset-4 rounded-3xl bg-accent/10 blur-2xl" />
-        {/* Uses the existing image at project root */}
-        <img src={mypic} alt="Profile" className="relative card w-full aspect-square object-cover rounded-3xl" />
+        
+        {/* Simple thumbnail to full size animation */}
+        <motion.img
+          src={mypic}
+          alt="Profile"
+          className="card w-full aspect-square object-cover rounded-3xl"
+          initial={{ 
+            scale: 0.2,
+            opacity: 0
+          }}
+          whileInView={{ 
+            scale: 1,
+            opacity: 1
+          }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ 
+            duration: 4.5,
+            ease: "easeInOut"
+          }}
+        />
       </motion.div>
     </div>
   )

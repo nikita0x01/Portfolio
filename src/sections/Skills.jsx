@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import { useTypingText, ANIMATION_VARIANTS } from "../utils/animations"
 
 const SKILL_CATEGORIES = [
   {
@@ -74,32 +75,35 @@ const SKILL_CATEGORIES = [
 ]
 
 export default function Skills() {
+  const typedHeading = useTypingText("Skills", 80);
+  
   return (
     <div>
       <motion.h2
         className="text-3xl md:text-4xl font-semibold mb-4"
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.5 }}
+        {...ANIMATION_VARIANTS.textContainer}
       >
-        Skills
+        {typedHeading}
       </motion.h2>
 
-      <p className="text-gray-300 mb-10 max-w-2xl">
-        A snapshot of the skills I use as a Full-Stack Developer , from frontend engineering and
+      <motion.p 
+        className="text-gray-300 mb-10 max-w-2xl"
+        {...ANIMATION_VARIANTS.fadeInUp}
+      >
+        A snapshot of skills I use as a Full-Stack Developer , from frontend engineering and
         backend services to databases, DevOps, AI, and architecture.
-      </p>
+      </motion.p>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <motion.div 
+        className="grid md:grid-cols-2 gap-6"
+        {...ANIMATION_VARIANTS.staggerContainer}
+      >
         {SKILL_CATEGORIES.map((group, idx) => (
           <motion.div
             key={group.title}
             className="card p-5 relative overflow-hidden"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: idx * 0.06 }}
+            {...ANIMATION_VARIANTS.cardSlideIn}
+            transition={{ ...ANIMATION_VARIANTS.cardSlideIn.transition, delay: idx * 0.1 }}
           >
             <div
               className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${group.color} opacity-80`}
@@ -121,7 +125,7 @@ export default function Skills() {
             </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   )
 }

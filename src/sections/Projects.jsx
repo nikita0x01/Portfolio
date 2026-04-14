@@ -2,9 +2,11 @@ import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { FiExternalLink, FiStar } from "react-icons/fi"
 import { SITE_CONFIG } from "../config"
+import { useTypingText, ANIMATION_VARIANTS } from "../utils/animations"
 
 export default function Projects() {
   const [repos, setRepos] = useState([])
+  const typedHeading = useTypingText("Projects", 80);
 
   // 👉 Only show your chosen projects
   useEffect(() => {
@@ -48,29 +50,30 @@ export default function Projects() {
     <div>
       <motion.h2
         className="text-3xl md:text-4xl font-semibold mb-4"
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.5 }}
+        {...ANIMATION_VARIANTS.textContainer}
       >
-        Projects
+        {typedHeading}
       </motion.h2>
 
-      <p className="text-gray-300 mb-10 max-w-2xl">
-        Below is a snapshot of the work I’ve built across different areas of development.
+      <motion.p 
+        className="text-gray-300 mb-10 max-w-2xl"
+        {...ANIMATION_VARIANTS.fadeInUp}
+      >
+        Below is a snapshot of work I've built across different areas of development.
         Each one reflects my focus on clean, modern, and functional code.
-      </p>
+      </motion.p>
 
       {/* ---------- PROJECT CARDS ---------- */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <motion.div 
+        className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        {...ANIMATION_VARIANTS.staggerContainer}
+      >
         {repos.map((repo, i) => (
           <motion.article
             key={repo.id}
             className="card overflow-hidden flex flex-col justify-between"
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: i * 0.06 }}
+            {...ANIMATION_VARIANTS.cardSlideIn}
+            transition={{ ...ANIMATION_VARIANTS.cardSlideIn.transition, delay: i * 0.1 }}
             whileHover={{ y: -4, transition: { duration: 0.2 } }}
           >
             <div className="relative">
@@ -121,10 +124,13 @@ export default function Projects() {
             </div>
           </motion.article>
         ))}
-      </div>
+      </motion.div>
 
       {/* ---------- VIEW MORE BUTTON (UNCHANGED) ---------- */}
-      <div className="mt-8">
+      <motion.div 
+        className="mt-8"
+        {...ANIMATION_VARIANTS.fadeInUp}
+      >
         <a
           href={`https://github.com/${SITE_CONFIG.githubUsername}?tab=repositories`}
           target="_blank"
@@ -133,7 +139,7 @@ export default function Projects() {
         >
           View more projects on GitHub
         </a>
-      </div>
+      </motion.div>
     </div>
   )
 }
