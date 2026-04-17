@@ -54,9 +54,9 @@ export default function About() {
         >
           <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-700 to-gray-700" />
 
-          <div className="mx-4 sm:mx-6 flex items-center justify-center gap-3 px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-black/50 border border-gray-700 backdrop-blur whitespace-nowrap">
-            <span className="h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-accent animate-pulse" />
-            <span className="text-xs sm:text-sm md:text-base text-gray-300">
+          <div className="mx-4 sm:mx-6 flex items-center justify-center gap-3 px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-black/50 border border-gray-700 backdrop-blur">
+            <span className="h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-accent animate-pulse flex-shrink-0" />
+            <span className="text-xs sm:text-sm md:text-base text-gray-300 text-center break-words max-w-full">
               When I'm not coding, you'll probably find me reading, thinking, or discovering something new...
             </span>
           </div>
